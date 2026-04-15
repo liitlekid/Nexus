@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS DEFENDERS - Cosmic Defense</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="main-container">
+        
+        <!-- Login / Auth Screen -->
+        <div id="auth-screen" class="screen active">
+            <div class="auth-panel">
+                <div class="logo">
+                    <h1>NEXUS<span class="accent">DEFENDERS</span></h1>
+                    <p class="tagline">Protect the Galaxy • One Wave at a Time</p>
+                </div>
+                
+                <div class="auth-tabs">
+                    <button id="tab-login" class="tab active">LOGIN</button>
+                    <button id="tab-register" class="tab">REGISTER</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="login-form" class="form-container">
+                    <div class="input-group">
+                        <label for="login-username">Username or Email</label>
+                        <input type="text" id="login-username" placeholder="Enter username or email" autocomplete="username">
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter password" autocomplete="current-password">
+                    </div>
+                    <button id="login-btn" class="primary-btn">LOGIN TO NEXUS</button>
+                    <div class="auth-options">
+                        <label><input type="checkbox" id="remember-me"> Remember me</label>
+                        <a href="#" id="forgot-password">Forgot password?</a>
+                    </div>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="register-form" class="form-container hidden">
+                    <div class="input-group">
+                        <label for="reg-username">Choose Username</label>
+                        <input type="text" id="reg-username" placeholder="Galactic handle" maxlength="20">
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-email">Email Address</label>
+                        <input type="email" id="reg-email" placeholder="you@galaxy.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-password">Create Password</label>
+                        <input type="password" id="reg-password" placeholder="Minimum 8 characters">
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-confirm">Confirm Password</label>
+                        <input type="password" id="reg-confirm" placeholder="Confirm password">
+                    </div>
+                    <button id="register-btn" class="primary-btn">JOIN THE DEFENDERS</button>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>Demo Mode: Data saved in browser only</p>
+                    <button id="guest-login" class="secondary-btn">Play as Guest</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            
+            <!-- Top HUD -->
+            <div class="hud-top">
+                <div class="player-info">
+                    <div class="avatar" id="player-avatar">👨‍🚀</div>
+                    <div>
+                        <div class="username" id="hud-username">Commander</div>
+                        <div class="level">Level <span id="hud-level">12</span></div>
+                    </div>
+                </div>
+                
+                <div class="score-container">
+                    <div class="score-label">SCORE</div>
+                    <div class="score" id="hud-score">000000</div>
+                </div>
+                
+                <div class="wave-info">
+                    <div class="wave-label">WAVE</div>
+                    <div class="wave-number" id="hud-wave">01</div>
+                </div>
+                
+                <div class="health-bar-container">
+                    <div class="health-label">HULL INTEGRITY</div>
+                    <div class="health-bar">
+                        <div class="health-fill" id="health-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                
+                <button id="pause-btn" class="hud-btn">⏸</button>
+            </div>
+            
+            <!-- Game Canvas -->
+            <div class="game-area">
+                <canvas id="game-canvas" width="1200" height="700"></canvas>
+                
+                <!-- Overlay Messages -->
+                <div id="game-overlay" class="overlay hidden">
+                    <div id="overlay-text" class="overlay-message"></div>
+                </div>
+                
+                <!-- Mini Map -->
+                <div class="mini-map">
+                    <canvas id="mini-map-canvas" width="180" height="180"></canvas>
+                </div>
+            </div>
+            
+            <!-- Bottom HUD -->
+            <div class="hud-bottom">
+                <div class="weapon-info">
+                    <div class="weapon-slot active" id="weapon-1">
+                        <span class="weapon-icon">🔫</span>
+                        <span class="weapon-name">BLASTER</span>
+                        <span class="ammo" id="ammo-1">∞</span>
+                    </div>
+                    <div class="weapon-slot" id="weapon-2">
+                        <span class="weapon-icon">🚀</span>
+                        <span class="weapon-name">MISSILE</span>
+                        <span class="ammo" id="ammo-2">12</span>
+                    </div>
+                    <div class="weapon-slot" id="weapon-3">
+                        <span class="weapon-icon">⚡</span>
+                        <span class="weapon-name">LASER</span>
+                        <span class="ammo" id="ammo-3">8</span>
+                    </div>
+                </div>
+                
+                <div class="power-ups">
+                    <div class="power-up-slot" id="powerup-shield">🛡️</div>
+                    <div class="power-up-slot" id="powerup-speed">⚡</div>
+                    <div class="power-up-slot" id="powerup-bomb">💣</div>
+                </div>
+                
+                <div class="controls-hint">
+                    <span>WASD / Arrow Keys - Move</span>
+                    <span>MOUSE - Aim & Fire</span>
+                    <span>SPACE - Special</span>
+                </div>
+            </div>
+            
+            <!-- Side Panel -->
+            <div class="side-panel">
+                <!-- Leaderboard -->
+                <div class="panel-section">
+                    <div class="panel-header">GLOBAL LEADERBOARD</div>
+                    <div class="leaderboard" id="leaderboard"></div>
+                </div>
+                
+                <!-- Friends Online -->
+                <div class="panel-section">
+                    <div class="panel-header">FRIENDS ONLINE <span class="online-count" id="online-count">7</span></div>
+                    <div class="friends-list" id="friends-list"></div>
+                </div>
+                
+                <!-- Chat -->
+                <div class="panel-section chat-section">
+                    <div class="panel-header">NEXUS CHAT</div>
+                    <div class="chat-window" id="chat-window"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Message the galaxy...">
+                        <button id="chat-send">SEND</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pause Menu -->
+        <div id="pause-menu" class="menu-screen hidden">
+            <div class="menu-panel">
+                <h2>GAME PAUSED</h2>
+                <button id="resume-btn" class="menu-btn">RESUME MISSION</button>
+                <button id="restart-btn" class="menu-btn">RESTART WAVE</button>
+                <button id="quit-btn" class="menu-btn">RETURN TO BASE</button>
+                
+                <div class="menu-stats">
+                    <div>Current Score: <span id="pause-score">124850</span></div>
+                    <div>Wave: <span id="pause-wave">7</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="menu-screen hidden">
+            <div class="menu-panel">
+                <h2 class="game-over-title">HULL BREACHED</h2>
+                <div class="final-score">FINAL SCORE <span id="final-score">248650</span></div>
+                <div class="new-highscore hidden" id="new-highscore">✨ NEW HIGH SCORE ✨</div>
+                
+                <button id="play-again-btn" class="primary-btn">DEPLOY AGAIN</button>
+                <button id="back-to-menu-btn" class="secondary-btn">RETURN TO NEXUS</button>
+            </div>
+        </div>
+        
+        <!-- Profile Modal -->
+        <div id="profile-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="modal-close" id="close-profile">×</span>
+                <div class="profile-header">
+                    <div class="big-avatar" id="modal-avatar">👨‍🚀</div>
+                    <div>
+                        <h2 id="modal-username">Commander Nova</h2>
+                        <p id="modal-title">Elite Defender • Level 42</p>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat"><span class="stat-value" id="total-score">1,284,920</span><span class="stat-label">TOTAL SCORE</span></div>
+                    <div class="stat"><span class="stat-value" id="games-played">87</span><span class="stat-label">MISSIONS</span></div>
+                    <div class="stat"><span class="stat-value" id="high-wave">23</span><span class="stat-label">HIGHEST WAVE</span></div>
+                </div>
+                <button id="logout-btn" class="secondary-btn">LOG OUT</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
